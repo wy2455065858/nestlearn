@@ -8,9 +8,13 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CatsModule } from './cats/cats.module';
 import { LoggerMiddleware } from './common/logger.middleware';
+import { ServeStaticModule } from '@nestjs/serve-static';
+import { join } from 'path';
 
 @Module({
-  imports: [CatsModule],
+  imports: [CatsModule, ServeStaticModule.forRoot({
+    rootPath: join(__dirname, '..', 'public'),
+  }),],
   controllers: [AppController],
   providers: [AppService],
 })
